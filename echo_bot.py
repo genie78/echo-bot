@@ -11,10 +11,16 @@ TOKEN = ''
 updater = Updater(token=TOKEN, use_context=True)
 
 def start(update: Update, context: CallbackContext):
-    update.message.reply_text("Hi, this is echo bot. It will repeat everything you write :D")
+    update.message.reply_text(f"Salam {update.effective_user.first_name}, bu bir exo botdur. Siz nə yazsanız təkrarlayacaq :D")
 
 def echo(update: Update, context: CallbackContext):
     update.message.reply_text(f"{update.message.text}")
-updater.dispatcher.add_handler(CommandHandler("start", start))
-updater.dispatcher.add_handler(MessageHandler(Filters.text,echo))
-updater.start_polling()
+
+def main():
+    updater.dispatcher.add_handler(CommandHandler("start", start))
+    updater.dispatcher.add_handler(MessageHandler(Filters.text,echo))
+    updater.start_polling()
+    updater.idle()
+
+if __name__=="__main__":
+    main()
